@@ -1,6 +1,10 @@
 class Admin::ProductsController < ApplicationController
+  # before_action :authenticate
+   http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD']
+  # http_basic_authenticate_with name: ENV["ADMIN_USERNAME"], password: "secret"
 
   def index
+  #  abort ENV["ADMIN_USERNAME"].inspect
     @products = Product.order(id: :desc).all
   end
 
@@ -35,6 +39,14 @@ class Admin::ProductsController < ApplicationController
       :image,
       :price
     )
+  end
+
+
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['ADMIN_USERNAME'] && password == ENV['ADMIN_PASSWORD']
+    end
   end
 
 end

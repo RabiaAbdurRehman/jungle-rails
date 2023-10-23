@@ -16,6 +16,12 @@
         <%= button_to add_item_cart_path(product_id: @product.id), class: 'btn' , method: :post do %>
           <%= fa_icon "shopping-cart", text: 'Add' %>
         <% end %>
+        <% if @product.quantity.zero? %>
+          <div class="soldout">
+            <%= button_to "Sold Out", "#", class: 'btn btn-danger', disabled: true %>
+          </div>
+        <% end %>
+
       </div>
     </div>
   </article>

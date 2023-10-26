@@ -5,19 +5,11 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   get 'users/new'
   get 'users/create'
-  # root to: 'products#index'
-  # get '/about', to: 'about#index'
 
+   root to: 'products#index'
+   get '/about', to: 'about#index'
 
-
-    root to: 'gif#cool'
-
-    get '/cool' => 'gif#cool'
-    get '/sweet' => 'gif#sweet'
-
-
-
-    # these routes are for showing users a login form, logging them in, and logging them out.
+  # these routes are for showing users a login form, logging them in, and logging them out.
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'

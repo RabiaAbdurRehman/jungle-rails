@@ -28,6 +28,13 @@ RSpec.describe Product, type: :model do
       expect(user.errors[:name]).to include("can't be blank")
     end
 
+    it "validates length of password" do
+      user = User.new(email: 'user@example.com', password: 'pass', password_confirmation: 'pass')
+      user.valid?
+      expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
+    end
+
+
 
 
   end

@@ -33,9 +33,37 @@ RSpec.describe Product, type: :model do
       user.valid?
       expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
     end
+  end
 
+  describe '.authenticate_with_credentials' do
+    
+    it 'returns the user instance when given valid credentials' do
+      user = User.create!(name:"sara", email: 'user@example.com', password: 'password')
+      authenticated_user = User.authenticate_with_credentials('user@example.com', 'password')
+      expect(authenticated_user).to eq(user)
+    end
 
+    it 'returns the user instance when given valid credentials' do
+      user = User.create!(name:"sara", email: 'user@example.com', password: 'password')
+      authenticated_user = User.authenticate_with_credentials('user@example.com', 'password')
+      expect(authenticated_user).to eq(user)
+    end
 
+    it 'returns nil when given invalid email' do
+      authenticated_user = User.authenticate_with_credentials('nonexistent@example.com', 'password')
+      expect(authenticated_user).to be_nil
+    end
 
+    it 'returns the user instance when given email has space' do
+      user = User.create(name:"sara", email: 'user@example.com', password: 'password')
+      authenticated_user = User.authenticate_with_credentials('  user@example.com  ', 'password')
+      expect(authenticated_user).to eq(user)
+    end
+
+    it 'returns the user instance when given email with different letter case' do
+      user = User.create(name:"sara", email: 'user@example.com', password: 'password')
+      authenticated_user = User.authenticate_with_credentials('USER@example.com', 'password')
+      expect(authenticated_user).to eq(user)
+    end
   end
 end

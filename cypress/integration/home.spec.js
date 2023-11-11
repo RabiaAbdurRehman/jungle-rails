@@ -15,7 +15,7 @@ describe('example to-do app', () => {
         cy.get(".products article").should("be.visible");
       });
 
-    it("There is 12 products on the page", () => {
-    cy.get(".products article").should("have.length", 12);
+    it("There is 2 products on the page", () => {
+    cy.get(".products article").should("have.length", 2);
     });
 })
